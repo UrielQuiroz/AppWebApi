@@ -9,6 +9,7 @@ namespace AppWebApi
     {
         public static void Register(HttpConfiguration config)
         {
+            config.EnableCors();
             // Configuración y servicios de API web
 
             // Rutas de API web

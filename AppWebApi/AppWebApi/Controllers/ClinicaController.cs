@@ -3,9 +3,11 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web.Http;
+using System.Web.Http.Cors;
 
 namespace AppWebApi.Controllers
 {
+    [EnableCors(headers: "*", origins: "*", methods: "*")]
     public class ClinicaController : ApiController
     {
         MedicoEntities db;

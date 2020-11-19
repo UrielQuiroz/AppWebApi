@@ -3,9 +3,12 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web.Http;
+using System.Web.Http.Cors;
 
 namespace AppWebApi.Controllers
 {
+
+    [EnableCors(headers: "*", origins: "*", methods: "*")]
     public class DoctorController : ApiController
     {
         MedicoEntities db;
@@ -36,8 +39,7 @@ namespace AppWebApi.Controllers
             return listDoctor;
         }
 
-
-
+        
         [HttpPut]
         public int eliminarDoctor(int idDoctor)
         {
@@ -83,6 +85,53 @@ namespace AppWebApi.Controllers
                                  }).First();
 
             return model;
+        }
+
+
+        [HttpPost]
+        public int AgregarDoctor([FromBody]Doctor oDoctor)
+        {
+            int rpta = 0;
+            try
+            {
+
+                if (oDoctor.IIDDOCTOR == 1)
+                {
+                    db.Doctor.Add(oDoctor);
+                    db.SaveChanges();
+                    rpta = 1;
+                }
+                else
+                {
+                    Doctor oDoc = db.Doctor.Where(p => p.IIDDOCTOR == oDoctor.IIDDOCTOR).First();
+                    oDoc.NOMBRE = oDoctor.NOMBRE;
+                    oDoc.APPATERNO = oDoctor.APPATERNO;
+                    oDoc.APMATERNO = oDoctor.APMATERNO;
+                    oDoc.IIDCLINICA = oDoctor.IIDCLINICA;
+                    oDoc.IIDESPECIALIDAD = oDoctor.IIDESPECIALIDAD;
+
+                    if (oDoctor.ARCHIVO != null || oDoctor.ARCHIVO != "")
+                    {
+                        oDoc.NOMBREARCHIVO = oDoctor.NOMBREARCHIVO;
+                        oDoc.ARCHIVO = oDoctor.ARCHIVO;
+                    }
+
+                    oDoc.EMAIL = oDoctor.EMAIL;
+                    oDoc.TELEFONOCELULAR = oDoctor.TELEFONOCELULAR;
+                    oDoc.IIDSEXO = oDoctor.IIDSEXO;
+                    oDoc.SUELDO = oDoctor.SUELDO;
+                    oDoc.FECHACONTRATO = oDoctor.FECHACONTRATO;
+                    db.SaveChanges();
+                    rpta = 1;
+                }
+
+            }
+            catch (Exception ex)
+            {
+                rpta = 0;
+            }
+
+            return rpta;
         }
 
     }

@@ -5,9 +5,12 @@ using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
+using System.Web.Http.Cors;
 
 namespace AppWebApi.Controllers
 {
+
+    [EnableCors(headers: "*", origins: "*", methods: "*")]
     public class EspecialidadController : ApiController
     {
         MedicoEntities db;
