@@ -173,6 +173,7 @@
     <Compile Include="Models\Clinica.cs">
       <DependentUpon>DBDoctor.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\ClinicaModel.cs" />
     <Compile Include="Models\Consulta.cs">
       <DependentUpon>DBDoctor.tt</DependentUpon>
     </Compile>
@@ -201,6 +202,7 @@
     <Compile Include="Models\Especialidad.cs">
       <DependentUpon>DBDoctor.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\EspecialidadModel.cs" />
     <Compile Include="Models\FormaFarmaceutica.cs">
       <DependentUpon>DBDoctor.tt</DependentUpon>
     </Compile>
